@@ -35,6 +35,38 @@ body {
   font-size: 0.9rem;
 }
 
+.tab-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 16px 0;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px;
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.tab-panel.hidden {
+  display: none;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: -4px 0 12px;
+}
+
 main {
   max-width: 900px;
   margin: 0 auto;
@@ -186,6 +218,79 @@ td.amount.negative { color: var(--negative); }
   color: var(--muted);
   text-align: center;
   padding: 20px 0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.status-applying { background: #e0e7ff; color: #3730a3; }
+.status-active { background: #fef3c7; color: #92400e; }
+.status-delivered { background: #dbeafe; color: #1e40af; }
+.status-paid { background: #dcfce7; color: #166534; }
+.status-cancelled { background: #f3f4f6; color: #6b7280; }
+
+.row-action {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 4px 6px;
+}
+
+.row-action.delete { color: var(--negative); }
+.row-action.mark-paid { color: var(--positive); }
+
+.target-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.target-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.target-card-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.target-progress-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.progress-bar {
+  background: #e5e7eb;
+  border-radius: 999px;
+  height: 10px;
+  margin: 8px 0;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: var(--accent);
+  height: 100%;
+}
+
+.progress-bar-fill.complete {
+  background: var(--positive);
+}
+
+.target-memo {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 4px 0 0;
 }
 
 footer {

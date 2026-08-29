@@ -9,10 +9,19 @@
 <body>
 <header class="app-header">
   <h1>Fund Tracker</h1>
-  <p class="subtitle">投資資金の入出金・運用損益を記録</p>
+  <p class="subtitle">単発の仕事で稼ぐ → 資金として記録 → 投資ターゲットに割り当てる、を一元管理</p>
 </header>
 
+<nav class="tab-nav" id="tabNav">
+  <button class="tab-btn active" data-tab="funds">資金管理</button>
+  <button class="tab-btn" data-tab="jobs">案件管理</button>
+  <button class="tab-btn" data-tab="targets">投資ターゲット</button>
+</nav>
+
 <main>
+
+<!-- ===================== 資金管理タブ ===================== -->
+<section class="tab-panel" id="tab-funds">
   <section class="summary-cards" id="summaryCards">
     <div class="card">
       <div class="card-label">現在の資産残高</div>
@@ -64,6 +73,12 @@
           メモ
           <input type="text" id="inputMemo" placeholder="任意（例：株式配当、月次入金 など）">
         </label>
+        <label>
+          投資ターゲットへ割り当て
+          <select id="inputTarget">
+            <option value="">（割り当てなし）</option>
+          </select>
+        </label>
       </div>
       <button type="submit">追加する</button>
     </form>
@@ -84,6 +99,7 @@
           <th>種別</th>
           <th>金額</th>
           <th>メモ</th>
+          <th>ターゲット</th>
           <th></th>
         </tr>
       </thead>
@@ -91,10 +107,130 @@
     </table>
     <p class="empty-message" id="emptyMessage">まだ記録がありません。上のフォームから追加してください。</p>
   </section>
+</section>
+
+<!-- ===================== 案件管理タブ ===================== -->
+<section class="tab-panel hidden" id="tab-jobs">
+  <section class="summary-cards" id="jobSummaryCards">
+    <div class="card">
+      <div class="card-label">進行中の案件数</div>
+      <div class="card-value" id="jobActiveCount">0</div>
+    </div>
+    <div class="card">
+      <div class="card-label">入金済み合計</div>
+      <div class="card-value" id="jobPaidTotal">¥0</div>
+    </div>
+    <div class="card">
+      <div class="card-label">入金待ち合計（見込み）</div>
+      <div class="card-value" id="jobPendingTotal">¥0</div>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <h2>案件を追加</h2>
+    <p class="hint">クラウドソーシング／単発の仕事（ワークスペース系のネット案件など）の進捗を記録します。実際の応募・契約・納品はご自身で行ってください。</p>
+    <form id="jobForm">
+      <div class="form-row">
+        <label class="memo-label">
+          案件名
+          <input type="text" id="jobTitle" placeholder="例：LP用バナー3枚作成" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>
+          プラットフォーム
+          <input type="text" id="jobPlatform" placeholder="例：クラウドワークス、ランサーズ">
+        </label>
+        <label>
+          状況
+          <select id="jobStatus">
+            <option value="applying">応募中</option>
+            <option value="active">受注・作業中</option>
+            <option value="delivered">納品済み・入金待ち</option>
+            <option value="paid">入金済み</option>
+            <option value="cancelled">見送り・不成立</option>
+          </select>
+        </label>
+        <label>
+          報酬見込み（円）
+          <input type="number" id="jobAmount" min="0" step="1">
+        </label>
+        <label>
+          期限
+          <input type="date" id="jobDue">
+        </label>
+      </div>
+      <div class="form-row">
+        <label class="memo-label">
+          メモ
+          <input type="text" id="jobMemo" placeholder="任意">
+        </label>
+      </div>
+      <button type="submit">追加する</button>
+    </form>
+  </section>
+
+  <section class="table-section">
+    <div class="table-header">
+      <h2>案件一覧</h2>
+    </div>
+    <table id="jobTable">
+      <thead>
+        <tr>
+          <th>案件名</th>
+          <th>プラットフォーム</th>
+          <th>状況</th>
+          <th>報酬</th>
+          <th>期限</th>
+          <th>メモ</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="jobTableBody"></tbody>
+    </table>
+    <p class="empty-message" id="jobEmptyMessage">まだ案件がありません。上のフォームから追加してください。</p>
+  </section>
+</section>
+
+<!-- ===================== 投資ターゲットタブ ===================== -->
+<section class="tab-panel hidden" id="tab-targets">
+  <section class="form-section">
+    <h2>投資ターゲットを追加</h2>
+    <p class="hint">「この資金はこの銘柄・目的のために貯める」という目標を作成します。資金管理タブの入金記録をこのターゲットに割り当てると、進捗が自動計算されます。実際の株式購入・発注はご自身の証券口座で行ってください。</p>
+    <form id="targetForm">
+      <div class="form-row">
+        <label class="memo-label">
+          銘柄名・目的
+          <input type="text" id="targetName" placeholder="例：〇〇株式会社 株式購入資金" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>
+          目標金額（円）
+          <input type="number" id="targetAmount" min="0" step="1" required>
+        </label>
+        <label class="memo-label">
+          メモ
+          <input type="text" id="targetMemo" placeholder="任意（別セッションの投資会社からの提案内容など）">
+        </label>
+      </div>
+      <button type="submit">追加する</button>
+    </form>
+  </section>
+
+  <section class="table-section">
+    <div class="table-header">
+      <h2>ターゲット一覧</h2>
+    </div>
+    <div id="targetList"></div>
+    <p class="empty-message" id="targetEmptyMessage">まだ投資ターゲットがありません。上のフォームから追加してください。</p>
+  </section>
+</section>
+
 </main>
 
 <footer>
-  <p>データはこの端末のブラウザ内にのみ保存されます（サーバーには送信されません）。</p>
+  <p>データはこの端末のブラウザ内にのみ保存されます（サーバーには送信されません）。口座登録・案件応募・株式売買の実行はご自身で行ってください。</p>
 </footer>
 
 <script src="script.js"></script>
