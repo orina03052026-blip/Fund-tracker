@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fund Tracker - 資金管理</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="app-header">
+  <h1>Fund Tracker</h1>
+  <p class="subtitle">投資資金の入出金・運用損益を記録</p>
+</header>
+
+<main>
+  <section class="summary-cards" id="summaryCards">
+    <div class="card">
+      <div class="card-label">現在の資産残高</div>
+      <div class="card-value" id="sumBalance">¥0</div>
+    </div>
+    <div class="card">
+      <div class="card-label">累計入金額</div>
+      <div class="card-value" id="sumDeposit">¥0</div>
+    </div>
+    <div class="card">
+      <div class="card-label">累計出金額</div>
+      <div class="card-value" id="sumWithdraw">¥0</div>
+    </div>
+    <div class="card">
+      <div class="card-label">累計運用損益</div>
+      <div class="card-value" id="sumPnl">¥0</div>
+    </div>
+  </section>
+
+  <section class="chart-section">
+    <h2>残高推移</h2>
+    <canvas id="balanceChart" width="800" height="240"></canvas>
+  </section>
+
+  <section class="form-section">
+    <h2>記録を追加</h2>
+    <form id="entryForm">
+      <div class="form-row">
+        <label>
+          日付
+          <input type="date" id="inputDate" required>
+        </label>
+        <label>
+          種別
+          <select id="inputType" required>
+            <option value="deposit">入金</option>
+            <option value="withdraw">出金</option>
+            <option value="gain">運用益</option>
+            <option value="loss">運用損</option>
+          </select>
+        </label>
+        <label>
+          金額（円）
+          <input type="number" id="inputAmount" min="0" step="1" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label class="memo-label">
+          メモ
+          <input type="text" id="inputMemo" placeholder="任意（例：株式配当、月次入金 など）">
+        </label>
+      </div>
+      <button type="submit">追加する</button>
+    </form>
+  </section>
+
+  <section class="table-section">
+    <div class="table-header">
+      <h2>記録一覧</h2>
+      <div class="table-actions">
+        <button type="button" id="exportBtn">CSV書き出し</button>
+        <button type="button" id="clearBtn" class="danger">全削除</button>
+      </div>
+    </div>
+    <table id="entryTable">
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>種別</th>
+          <th>金額</th>
+          <th>メモ</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="entryTableBody"></tbody>
+    </table>
+    <p class="empty-message" id="emptyMessage">まだ記録がありません。上のフォームから追加してください。</p>
+  </section>
+</main>
+
+<footer>
+  <p>データはこの端末のブラウザ内にのみ保存されます（サーバーには送信されません）。</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
