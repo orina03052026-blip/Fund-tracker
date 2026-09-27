@@ -362,3 +362,10 @@ footer {
 .research-flag.profit { background: #fee2e2; color: #b91c1c; }
 .research-flag.loss { background: #fef3c7; color: #92400e; }
 .research-flag.exit { background: #e0e7ff; color: #3730a3; }
+.research-flag.broker-unavailable {
+  display: block;
+  margin-top: 4px;
+  background: #f3f4f6;
+  color: #6b7280;
+  white-space: normal;
+}

@@ -10,7 +10,7 @@ const RESEARCH_SNAPSHOT = {
     { ticker: "9331107A", name: "キャピタル世界株式ファンド", signal: "様子見(積立継続)", entry: 41854, current: 41436, unit: "円", pct: -1.00, flag: null, note: "判定対象外・分散された土台資産" },
   ],
   candidates: [
-    { ticker: "ALAB", name: "Astera Labs", signal: "跳ねそう(強気加速)", entry: 303.40, current: 364.62, unit: "$", pct: 20.18, flag: "profit", note: "初の利確ライン(+15%)突破・オーナー判断待ち" },
+    { ticker: "ALAB", name: "Astera Labs", signal: "跳ねそう(強気加速)", entry: 303.40, current: 364.62, unit: "$", pct: 20.18, flag: "profit", broker: "PayPay証券: 取扱なし(2026-09-27確認)", note: "初の利確ライン(+15%)突破・オーナー判断待ち。実口座では購入不可" },
     { ticker: "6981", name: "村田製作所", signal: "様子見(テーマ次第)", entry: 7205, current: 8022, unit: "円", pct: 11.34, flag: null, note: "AIサーバー向けコンデンサでデータセンターテーマ堅調" },
     { ticker: "ETN", name: "Eaton", signal: "様子見(利確一巡待ち)", entry: 431.33, current: 439.98, unit: "$", pct: 2.01, flag: null, note: "電源インフラ本命、上値は他候補より限定的" },
     { ticker: "7013", name: "IHI", signal: "要警戒(急落中)", entry: 2867, current: 2797, unit: "円", pct: -2.44, flag: null, note: "✅的中(9/5確定)。急落からほぼ発行時水準まで回復" },

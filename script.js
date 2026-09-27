@@ -366,9 +366,12 @@ function renderResearchRow(row, withFlagCol) {
   const flagCell = withFlagCol
     ? `<td>${row.flag ? `<span class="research-flag ${row.flag}">${FLAG_LABELS[row.flag] || row.flag}</span>` : "―"}</td>`
     : "";
+  const brokerBadge = row.broker
+    ? `<span class="research-flag broker-unavailable">${escapeHtml(row.broker)}</span>`
+    : "";
   return `
     <tr>
-      <td class="rname">${escapeHtml(row.name)}<span class="hs" style="display:block;font-weight:400;font-size:11px;color:var(--muted)">${escapeHtml(row.ticker)}</span></td>
+      <td class="rname">${escapeHtml(row.name)}<span class="hs" style="display:block;font-weight:400;font-size:11px;color:var(--muted)">${escapeHtml(row.ticker)}</span>${brokerBadge}</td>
       <td>${escapeHtml(row.signal)}</td>
       <td class="num" style="text-align:right">${formatEntryToCurrent(row)}</td>
       <td class="rpct ${pctClass}" style="text-align:right">${pctText}</td>
