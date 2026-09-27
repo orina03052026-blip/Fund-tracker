@@ -194,6 +194,32 @@
 
 <!-- ===================== 投資ターゲットタブ ===================== -->
 <section class="tab-panel hidden" id="tab-targets">
+  <section class="research-section">
+    <div class="table-header">
+      <h2>証券チームの動向・予想</h2>
+      <div class="research-meta" id="researchMeta"></div>
+    </div>
+    <p class="hint">オリナ証券チーム(CEO+4部下体制)のシグナル・チェック結果です。チェック日ごとに手動で更新されるスナップショットで、リアルタイムの株価ではありません。断定的な売買推奨ではなく判断材料です。</p>
+    <h3 class="research-subhead">保有銘柄</h3>
+    <div class="table-wrap">
+      <table class="research-table" id="researchHoldingsTable">
+        <thead>
+          <tr><th>銘柄</th><th>予想シグナル</th><th style="text-align:right">発行時→現在</th><th style="text-align:right">騰落率</th><th>一言</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <h3 class="research-subhead">新規候補10選</h3>
+    <div class="table-wrap">
+      <table class="research-table" id="researchCandidatesTable">
+        <thead>
+          <tr><th>銘柄</th><th>予想シグナル</th><th style="text-align:right">発行時→現在</th><th style="text-align:right">騰落率</th><th>フラグ</th><th>一言</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
   <section class="form-section">
     <h2>投資ターゲットを追加</h2>
     <p class="hint">「この資金はこの銘柄・目的のために貯める」という目標を作成します。資金管理タブの入金記録をこのターゲットに割り当てると、進捗が自動計算されます。実際の株式購入・発注はご自身の証券口座で行ってください。</p>
@@ -233,6 +259,7 @@
   <p>データはこの端末のブラウザ内にのみ保存されます（サーバーには送信されません）。口座登録・案件応募・株式売買の実行はご自身で行ってください。</p>
 </footer>
 
+<script src="research-data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

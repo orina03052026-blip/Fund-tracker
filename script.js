@@ -351,6 +351,52 @@ jobForm.addEventListener("submit", (e) => {
   renderAll();
 });
 
+// ================= 証券チームの動向・予想 =================
+
+const FLAG_LABELS = { profit: "💰利確検討", loss: "⚠️損切り検討", exit: "ライン脱出" };
+
+function formatEntryToCurrent(row) {
+  const fmt = (v) => (row.unit === "$" ? v.toFixed(2) + row.unit : Math.round(v).toLocaleString("ja-JP") + row.unit);
+  return `${fmt(row.entry)}→${fmt(row.current)}`;
+}
+
+function renderResearchRow(row, withFlagCol) {
+  const pctClass = row.pct >= 0 ? "positive" : "negative";
+  const pctText = (row.pct >= 0 ? "+" : "") + row.pct.toFixed(2) + "%";
+  const flagCell = withFlagCol
+    ? `<td>${row.flag ? `<span class="research-flag ${row.flag}">${FLAG_LABELS[row.flag] || row.flag}</span>` : "―"}</td>`
+    : "";
+  return `
+    <tr>
+      <td class="rname">${escapeHtml(row.name)}<span class="hs" style="display:block;font-weight:400;font-size:11px;color:var(--muted)">${escapeHtml(row.ticker)}</span></td>
+      <td>${escapeHtml(row.signal)}</td>
+      <td class="num" style="text-align:right">${formatEntryToCurrent(row)}</td>
+      <td class="rpct ${pctClass}" style="text-align:right">${pctText}</td>
+      ${flagCell}
+      <td class="rnote">${escapeHtml(row.note || "")}</td>
+    </tr>
+  `;
+}
+
+function renderResearch() {
+  if (typeof RESEARCH_SNAPSHOT === "undefined") return;
+
+  const meta = document.getElementById("researchMeta");
+  if (meta) {
+    meta.textContent = `チェック日 ${RESEARCH_SNAPSHOT.checkedAt}（次回 ${RESEARCH_SNAPSHOT.nextCheck}）`;
+  }
+
+  const holdingsBody = document.querySelector("#researchHoldingsTable tbody");
+  if (holdingsBody) {
+    holdingsBody.innerHTML = RESEARCH_SNAPSHOT.holdings.map((r) => renderResearchRow(r, false)).join("");
+  }
+
+  const candidatesBody = document.querySelector("#researchCandidatesTable tbody");
+  if (candidatesBody) {
+    candidatesBody.innerHTML = RESEARCH_SNAPSHOT.candidates.map((r) => renderResearchRow(r, true)).join("");
+  }
+}
+
 // ================= 投資ターゲット =================
 
 const targetForm = document.getElementById("targetForm");
@@ -418,6 +464,7 @@ function renderAll() {
   renderEntries();
   renderJobs();
   renderTargets();
+  renderResearch();
 }
 
 dateInput.valueAsDate = new Date();
